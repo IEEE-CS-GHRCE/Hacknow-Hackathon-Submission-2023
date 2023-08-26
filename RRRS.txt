@@ -1,0 +1,210 @@
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:share/share.dart'; // Import the share package
+import 'home_page.dart'; // Import the HomePage
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Real-Time Polling App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      initialRoute: '/', // Set the initial route to '/'
+      routes: {
+        '/': (context) => HomePage(), // Use HomePage as the initial route
+        '/polling': (context) => PollingPage(),
+        '/signin': (context) => SignInPage(),
+      },
+    );
+  }
+}
+
+class _PollingPageState extends State<PollingPage> {
+  // ... Existing code ...
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // ... Existing code ...
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            // ... Existing code ...
+          ),
+          SizedBox(height: 10),
+          FloatingActionButton(
+            onPressed: () {
+              final message = "Check out this poll!";
+              Share.share(message);
+            },
+            child: Icon(Icons.share),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Real-Time Polling App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => PollingPage(),
+        '/signin': (context) => SignInPage(),
+      },
+    );
+  }
+}
+
+class PollingPage extends StatefulWidget {
+  @override
+  _PollingPageState createState() => _PollingPageState();
+}
+
+class _PollingPageState extends State<PollingPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Real-Time Polling App'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            PollWidget(question: 'Poll Question', options: ['Option 1', 'Option 2', 'Option 3']),
+            SizedBox(height: 20),
+            PollWidget(question: 'Another Poll Question', options: ['Option A', 'Option B', 'Option C']),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/signin');
+        },
+        child: Icon(Icons.person),
+      ),
+    );
+  }
+}
+
+class PollWidget extends StatefulWidget {
+  final String question;
+  final List<String> options;
+
+  PollWidget({required this.question, required this.options});
+
+  @override
+  _PollWidgetState createState() => _PollWidgetState();
+}
+
+class _PollWidgetState extends State<PollWidget> {
+  String? selectedOption;
+
+  void _submitVote() {
+    if (selectedOption != null) {
+      // In a real application, this is where you would send the vote to the server.
+      print('Vote submitted: Question: ${widget.question}, Option: $selectedOption');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(widget.question, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          SizedBox(height: 10),
+          ...widget.options.map(
+            (option) => RadioListTile(
+              title: Text(option),
+              value: option,
+              groupValue: selectedOption,
+              onChanged: (value) {
+                setState(() {
+                  selectedOption = value as String?;
+                });
+              },
+            ),
+          ).toList(),
+          SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: _submitVote,
+            child: Text('Vote'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SignInPage extends StatefulWidget {
+  @override
+  _SignInPageState createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  void _signIn() async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    // In a real application, you would send the email and password to the server for authentication.
+    print('Sign In: Email: $email, Password: $password');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Sign In'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(labelText: 'Email'),
+            ),
+            SizedBox(height: 20),
+            TextField(
+              controller: _passwordController,
+              obscureText: true,
+              decoration: InputDecoration(labelText: 'Password'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _signIn,
+              child: Text('Sign In'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
