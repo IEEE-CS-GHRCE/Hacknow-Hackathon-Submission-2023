@@ -13,6 +13,6 @@
 # Format of README file
 * Team Name : [BUG CRAWLERS]
 * Members Name : [Vaidehi Vaishnav] [Abhijeet Rai] [Prashant Kamale] [Ashish Singh]
-* Description : [Food Rescue]
+* Description : [Food Rescue/Food Description Plateform]
 * Please add Steps : Please open "front.html" file to view the webpage.
 
