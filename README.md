@@ -13,6 +13,6 @@
 # Format of README file
 * Team Name : [BUG CRAWLERS]
 * Members Name : [Vaidehi Vaishnav] [Abhijeet Rai] [Prashant Kamale] [Ashish Singh]
-* Description : [Description]
+* Description : [Food Rescue]
 * Please add Steps : How to Run the Program with Commands.
 
