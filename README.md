@@ -14,5 +14,5 @@
 * Team Name : [BUG CRAWLERS]
 * Members Name : [Vaidehi Vaishnav] [Abhijeet Rai] [Prashant Kamale] [Ashish Singh]
 * Description : [Food Rescue]
-* Please add Steps : How to Run the Program with Commands.
+* Please add Steps : Please open "front.html" file to view the webpage.
 
