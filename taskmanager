@@ -1,0 +1,41 @@
+import turtle
+
+class ToDoApp:
+    def __init__(self):
+        self.tasks = []
+        self.screen = turtle.Screen()
+        self.screen.title("To-Do List App")
+        self.pen = turtle.Turtle()
+        self.pen.penup()
+        self.pen.goto(-200, 200)
+        self.screen.onclick(self.handle_click)
+
+    def draw_task(self, task, completed=False):
+        status = "✓" if completed else " "
+        self.pen.write(f"[{status}] {task}", font=("Arial", 16, "normal"))
+        self.pen.goto(self.pen.xcor(), self.pen.ycor() - 40)
+
+    def add_task(self, task):
+        self.tasks.append({"task": task, "completed": False})
+        self.pen.clear()
+        for task_info in self.tasks:
+            self.draw_task(task_info["task"], task_info["completed"])
+
+    def mark_completed(self, task_index):
+        if 1 <= task_index <= len(self.tasks):
+            self.tasks[task_index - 1]["completed"] = True
+            self.pen.clear()
+            for task_info in self.tasks:
+                self.draw_task(task_info["task"], task_info["completed"])
+
+    def handle_click(self, x, y):
+        task_index = len(self.tasks) - (y - 200) // 40
+        if 1 <= task_index <= len(self.tasks):
+            self.mark_completed(task_index)
+
+def main():
+    app = ToDoApp()
+    turtle.mainloop()
+
+if __name__ == "__main__":
+    main()
