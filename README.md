@@ -11,8 +11,8 @@
   
 
 # Format of README file
-* Team Name : [TEAM NAME]
-* Members Name : [Member 1] [Member 2] [Member 3] etc...
-* Description : [Description]
-* Please add Steps : How to Run the Program with Commands.
+* Team Name : [BUG CRAWLERS]
+* Members Name : [Vaidehi Vaishnav] [Abhijeet Rai] [Prashant Kamale] [Ashish Singh]
+* Description : [Food Rescue/Food Description Plateform]
+* Please add Steps : Please open "front.html" file to view the webpage.
 
